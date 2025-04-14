@@ -5,6 +5,8 @@ OpenAI-based server implementation for the A2A protocol.
 import uuid
 from typing import Optional, Dict, Any, List, Union
 
+from python_a2a.client import base
+
 try:
     from openai import OpenAI
 except ImportError:
@@ -28,6 +30,7 @@ class OpenAIA2AServer(BaseA2AServer):
     def __init__(
         self,
         api_key: str,
+        base_url: Optional[str] = "https://api.openai.com/v1" ,
         model: str = "gpt-4",
         temperature: float = 0.7,
         system_prompt: Optional[str] = None,
@@ -38,6 +41,7 @@ class OpenAIA2AServer(BaseA2AServer):
         
         Args:
             api_key: OpenAI API key
+            base_url: OpenAI BaseUrl
             model: OpenAI model to use (default: "gpt-4")
             temperature: Generation temperature (default: 0.7)
             system_prompt: Optional system prompt to use for all conversations
@@ -57,7 +61,7 @@ class OpenAIA2AServer(BaseA2AServer):
         self.temperature = temperature
         self.system_prompt = system_prompt or "You are a helpful AI assistant."
         self.functions = functions
-        self.client = OpenAI(api_key=api_key)
+        self.client = OpenAI(api_key=api_key, base_url=base_url)
     
     def handle_message(self, message: Message) -> Message:
         """
