@@ -22,8 +22,6 @@ class EchoAgent(A2AServer):
         )
 
 
-
-
 # Run the server
 if __name__ == "__main__":
     # agent = EchoAgent()
