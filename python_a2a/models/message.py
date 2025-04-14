@@ -49,8 +49,8 @@ class Message(BaseModel):
             raise ValueError(f"Unknown content type: {content_type}")
         
         metadata = None
-        if "metadata" in data:
-            metadata = Metadata.from_dict(data["metadata"])
+        # if "metadata" in data:
+        #     metadata = Metadata.from_dict(data["metadata"])
         
         # Get the role as a string, then convert to enum
         role_str = data.get("role", MessageRole.USER)
